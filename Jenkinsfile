@@ -16,11 +16,15 @@ podTemplate(
         '''
       }
     }
+    
+    
+   
+    
+    
     stage("DockerBuild_1") {
-  container($class: 'Docker', name: "docker-container") {
-    withCredentials([
-      [credentialsId: "docker-config", variable: "DOCKER_CONFIG"]
-    ]) {
+      container(name: "docker-container") {
+        withCredentials([file(credentialsId: 'docker-config', variable: 'DOCKERH_CONFIG')]) {
+ 
       sh '''
         docker build -t "samarbelhadj/testleto:1.0" -f Dockerfile .
       '''
@@ -31,8 +35,8 @@ podTemplate(
     stage("DockerPush_1") {
       container(name: "docker-container") {
         withCredentials([
-          [credentialsId: "docker-config", variable: "DOCKER_CONFIG"]
-        ]) {
+          withCredentials([file(credentialsId: 'docker-config', variable: 'DOCKERH_CONFIG')])
+          {
           sh '''
             docker push "samarbelhadj/testleto:1.0"
           '''
