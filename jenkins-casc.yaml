@@ -1,0 +1,21 @@
+jobs:
+- script: |
+    folder("leto")
+- script: |
+    pipelineJob("leto/PipelineJob_1") {
+      // TODO parameters
+      definition {
+        cpsScm {
+          scriptPath "Jenkinsfile"
+          lightweight true
+          scm {
+            git {
+              remote {
+                url "https://github.com/samar-b/Continuous-integration-project"
+              }
+              branch "*/main"
+            }
+          }
+        }
+      }
+    }
