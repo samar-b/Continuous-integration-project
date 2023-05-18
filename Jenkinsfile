@@ -20,7 +20,7 @@ podTemplate(
     }
     stage("DockerBuild_1") {
       container("docker-container") {
-          withCredentials([[$class: credentialsId: "docker-config", variable: "DOCKER_CONFIG"]]) {
+          withCredentials([[credentialsId: "docker-config", variable: "DOCKER_CONFIG"]]) {
             sh """
               docker build -t "samarbelhadj/testleto:1.0"  -f Dockerfile .
             """
@@ -30,7 +30,7 @@ podTemplate(
     }
     stage("DockerPush_1") {
       container("docker-container") {
-          withCredentials([[$class: "credentialsId: "", variable: "DOCKER_CONFIG"]]) {
+          withCredentials([[ credentialsId: "docker-config", variable: "DOCKER_CONFIG"]]) {
             sh """
               docker push "samarbelhadj/testleto:1.0"
             """
