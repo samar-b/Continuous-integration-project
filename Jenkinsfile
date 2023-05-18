@@ -17,16 +17,17 @@ podTemplate(
       }
     }
     stage("DockerBuild_1") {
-      container(name: "docker-container") {
-        withCredentials([
-          [credentialsId: "docker-config", variable: "DOCKER_CONFIG"]
-        ]) {
-          sh '''
-            docker build -t "samarbelhadj/testleto:1.0" -f Dockerfile .
-          '''
-        }
-      }
+  container($class: 'Docker', name: "docker-container") {
+    withCredentials([
+      [credentialsId: "docker-config", variable: "DOCKER_CONFIG"]
+    ]) {
+      sh '''
+        docker build -t "samarbelhadj/testleto:1.0" -f Dockerfile .
+      '''
     }
+  }
+}
+
     stage("DockerPush_1") {
       container(name: "docker-container") {
         withCredentials([
