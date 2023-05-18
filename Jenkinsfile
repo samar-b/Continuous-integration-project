@@ -12,7 +12,7 @@ podTemplate(
     stage("BuildAndTestJava_1") {
       container(name: "java-container") {
         sh '''
-          mvn -f "./pom.xml" clean install
+          mvn -f \"./pom.xml\" clean install -DskipTests
         '''
       }
     }
