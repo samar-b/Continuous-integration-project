@@ -34,7 +34,6 @@ podTemplate(
 
     stage("DockerPush_1") {
       container(name: "docker-container") {
-        withCredentials([
           withCredentials([file(credentialsId: 'docker-config', variable: 'DOCKERH_CONFIG')])
           {
           sh '''
@@ -43,5 +42,5 @@ podTemplate(
         }
       }
     }
-  }
+  
 }
